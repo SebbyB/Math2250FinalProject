@@ -1,13 +1,15 @@
 clc
 clear 
 
-x_1850i = [6e2, 2.1e3, 7e2, 3.8e4, 4.8e7]
+x_1850i = [11e2, 2.1e3, 7e2, 3.8e4, (4.8*10^7)-500]
 
 A = [0 , 120, 90.15, 0, 0; 120, 0, 0, 0, 0; 9, 0, 0, 5.3, 0; 0, 0, 5, 0, 0.3; 0.15, 0, 0.15, 0, 0];
 
 [V,D] = eig(A);
 
-t = 0;
+t = 0 ;
+
+syms tFinal
 
 
 v1 = V(:,1);
@@ -38,19 +40,15 @@ a(n) = eval(solve(eqn, c(n)));
 
 end
 
-Final = zeros(1,5);
-Final(1)  =  eta(1)*exp(Lambda(1)*t)*a(1);
-
-Final(2)  =  eta(2)*exp(Lambda(2)*t)*a(2);
-
-Final(3)  =  eta(3)*exp(Lambda(3)*t)*a(3);
-
-Final(4)  =  eta(4)*exp(Lambda(4)*t)*a(4);
-
-Final(5)  =  eta(5)*exp(Lambda(5)*t)*a(5);
-
-Final
-
-PROOF = Final - x_1850i
+xFinal = ([(11*10^2), 2.1e3, 7e2, 3.8e4, (4.8*10^7)-500]) / 2
 
 
+for n = 1:5
+eqn = eta(n)*exp(Lambda(n)*(tFinal))*a(n) ==xFinal(n);
+
+p(n) = eval(solve(eqn, tFinal));
+
+end
+
+
+tFinal = norm(p)
