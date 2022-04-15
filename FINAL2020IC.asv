@@ -1,13 +1,19 @@
 clc
 clear 
+format long
+x_1850i = [600, 2.1e3, 7e2, 3.8e4, (4.8*10^7)];
 
-x_1850i = [11e2, 2.1e3, 7e2, 3.8e4, (4.8*10^7)-500]
-
-A = [0 , 120, 90.15, 0, 0; 120, 0, 0, 0, 0; 9, 0, 0, 5.3, 0; 0, 0, 5, 0, 0.3; 0.15, 0, 0.15, 0, 0];
+A = [-210.15/600 ,2/35, 9/70, 0, .15/4.8e7; ...
+    1/5, -2/35, 0, 0, 0; ...
+    90.5/600, 0, -95.3/700, 5/38000, .15/4.8e7;...
+    0, 0, 5.3/700, -5.3/38000, 0;...
+    0, 0, 0, .3/38000, -.3/4.8e7];
 
 [V,D] = eig(A);
 
-t = ;
+t = 0 ;
+
+syms tFinal
 
 
 v1 = V(:,1);
@@ -35,22 +41,21 @@ for n = 1:5;
 eqn = eta(n)*exp(Lambda(n)*t)*c(n) ==x_1850i(n);
 
 a(n) = eval(solve(eqn, c(n)));
+syms k
 
-end
+end;
+at = [500, 0 , 0 , 0, -500]'
 
-Final = zeros(1,5);
-Final(1)  =  eta(1)*exp(Lambda(1)*t)*a(1);
-
-Final(2)  =  eta(2)*exp(Lambda(2)*t)*a(2);
-
-Final(3)  =  eta(3)*exp(Lambda(3)*t)*a(3);
-
-Final(4)  =  eta(4)*exp(Lambda(4)*t)*a(4);
-
-Final(5)  =  eta(5)*exp(Lambda(5)*t)*a(5);
-
-Final
-
-PROOF = Final - x_1850i
-
-
+% 
+% 
+% 
+% xFinal = ([(11*10^2), 2.1e3, 7e2, 3.8e4, (4.8*10^7)-500]) / 2
+% for n = 1:5
+% eqn = eta(n)*exp(Lambda(n)*(tFinal))*a(n) == xFinal(n);
+% 
+% p(n) = eval(solve(eqn, tFinal));
+% 
+% end
+% p
+% tFinal = norm(p)
+sprintf("Code finshed...")

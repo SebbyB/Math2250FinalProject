@@ -1,9 +1,13 @@
 clc
 clear 
+format long
+x_1850i = [600, 2.1e3, 7e2, 3.8e4, (4.8*10^7)];
 
-x_1850i = [11e2, 2.1e3, 7e2, 3.8e4, (4.8*10^7)-500]
-
-A = [0 , 120, 90.15, 0, 0; 120, 0, 0, 0, 0; 9, 0, 0, 5.3, 0; 0, 0, 5, 0, 0.3; 0.15, 0, 0.15, 0, 0];
+A = [-210.15/600 ,2/35, 9/70, 0, .15/4.8e7; ...
+    1/5, -2/35, 0, 0, 0; ...
+    90.5/600, 0, -95.3/700, 5/38000, .15/4.8e7;...
+    0, 0, 5.3/700, -5.3/38000, 0;...
+    0, 0, 0, .3/38000, -.3/4.8e7];
 
 [V,D] = eig(A);
 
@@ -21,7 +25,7 @@ eta = [v1,v2,v3,v4,v5];
 Lambda = [D(1,1), D(2,2), D(3,3), D(4,4),  D(5,5)];
 
 syms c1 c2 c3 c4 c5 
-c = [c1,c2,c3,c4,c5]  ;
+c = [c1,c2,c3,c4,c5];
 
 
 % eqn = eta(1)*exp(Lambda(1)*tint)*c1 ==x_1850i(1);
@@ -33,22 +37,24 @@ c = [c1,c2,c3,c4,c5]  ;
 % x_1850i(n) == eta(n)*exp(Lambda(n)*tint)*c(n)
 
 a = zeros(1,5);
-for n = 1:5;
+for n = 1:5
 eqn = eta(n)*exp(Lambda(n)*t)*c(n) ==x_1850i(n);
 
 a(n) = eval(solve(eqn, c(n)));
+syms k
 
 end
-
-xFinal = ([(11*10^2), 2.1e3, 7e2, 3.8e4, (4.8*10^7)-500]) / 2
-
-
-for n = 1:5
-eqn = eta(n)*exp(Lambda(n)*(tFinal))*a(n) ==xFinal(n);
-
-p(n) = eval(solve(eqn, tFinal));
-
-end
+at = [500, 0 , 0 , 0, -500]';
 
 
-tFinal = norm(p)
+
+% xFinal = ([(11*10^2), 2.1e3, 7e2, 3.8e4, (4.8*10^7)-500]) / 2
+% for n = 1:5
+% eqn = eta(n)*exp(Lambda(n)*(tFinal))*a(n) == xFinal(n);
+% 
+% p(n) = eval(solve(eqn, tFinal));
+% 
+% end
+% p
+% tFinal = norm(p)
+fprintf("Code finshed...\n")
