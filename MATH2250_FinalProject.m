@@ -20,12 +20,12 @@ t = linspace(0,10);
 X = x(t);
 % plot(t,X(1:3,:))
 hold on
-plot(2.2222,851.056,'r*',"Atmospheric Halflife")
+plot(2.2222,851.056,'r*')
 plot(t,X(1,:),'r')
-% plot(t,X(2,:), ...
-%     'g')
-% plot(t,X(3,:),'b')
+plot(t,X(2,:),'g')
+plot(t,X(3,:),'b')
 title('Emissions over Time with immediate drop to zero')
 ylabel('Carbon Emissions (GigaTonnes)')
 xlabel('Time (Years)')
-legend
+Labels = ["Atmosphric Halflife" "Atmosphere" "BioSphere" "Surface Ocean"]
+legend(Labels);
