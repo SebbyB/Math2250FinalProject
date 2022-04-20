@@ -1,19 +1,20 @@
-# Math2250FinalProject
-##Spring 2022 Math 2250 Final Project
+# Math2250FinalProject  
+
+##Spring 2022 Math 2250 Final Project  
 
 
 
-##Authors:
+##Authors:  
 
-*Benjamin Davis
-*Rui Jin
-*Sebastian Barney
+*Benjamin Davis  
+*Rui Jin  
+*Sebastian Barney  
 
-##Due Dates:
-First Draft
+##Due Dates:  
+*First Draft  
 > April 14th, 2022.
 
-Final Submission
+*Final Submission  
 > April 21st, 2022.
 
 
