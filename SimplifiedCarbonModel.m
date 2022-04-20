@@ -25,4 +25,4 @@ title('Emissions over Time with immediate drop to zero - Simplified')
 ylabel('Carbon Emissions (GigaTonnes)')
 xlabel('Time (Years)')
 Labels = ["Atmosphere" "BioSphere" "Surface Ocean"]
-legend(Labels);
+legend(Labels, location = "Northwest" );
