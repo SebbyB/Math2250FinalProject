@@ -2,18 +2,26 @@
 clc
 clear
 format long
+Bios = (-120/2100)*0.01
+Atmos = 0.1*Bios
 x_1850i = [1100 2100 700]
 B = [-210/600 , 120/2100, 90/700; ...
     120/600, -120/2100, 0; ...
     90/600 , 0, -90/700];
+K = [0, 0, 0;...
+    Atmos, -Bios, 0;...
+    0, 0, 0]
 
-[V,D] = eig(B);
+
+
+
+[V,D] = eig(B-K);
 
 t = 0;
 a = V\x_1850i';
 f = @(t) a.*exp(diag(D)*t);
 x = @(t) V*f(t);
-t = linspace(0,50);
+t = linspace(0,200);
 
 X = x(t);
 % plot(t,X(1:3,:))
